@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+
+// 1. Astro에게 어떤 페이지들을 미리 만들지 알려줍니다.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { id: post.id }, // 주소창에 쓰일 id (예: first-post)
+    props: { post },         // 해당 페이지에 넘겨줄 데이터
+  }));
+}
+
+// 2. 위에서 넘겨준 props를 받습니다.
+const { post } = Astro.props;
+// 3. 마크다운 본문을 렌더링합니다.
+const { Content } = await render(post);
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>{post.data.title}</title>
+</head>
+<body>
+    <nav><a href="/">← 목록으로 돌아가기</a></nav>
+    <hr />
+    <h1>{post.data.title}</h1>
+    <p>발행일: {post.data.date.toLocaleDateString()}</p>
+    
+    <article>
+        <Content />
+    </article>
+</body>
+</html>
