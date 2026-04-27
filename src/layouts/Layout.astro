@@ -1,3 +1,7 @@
+---
+import '../styles/global.css';
+const {title} = Astro.props;
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,18 +10,24 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Daily Learning English</title>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-slate-50 text-slate-900 antialiased">
+		<nav class="p-6 bg-white shadow-sm">
+			<div class="max-w-4xl mx-auto flex justify-between items-center">
+				<a href="/" class="text-xl font-bold text-indigo-600">Daily English</a>
+				<div class="space-x-4">
+					<a href="/" class="hover:text-indigo-500">Home</a>
+					<a href="/blog/first-post" class="hover:text-indigo-500">Latest Post</a>
+				</div>
+			</div>
+		</nav>
+		
+		<main class="max-w-4xl mx-auto p-6">
+			<slot /> </main>
+
+		<footer class="text-center p-10 text-slate-400 text-sm">
+			© 2026 Daily Learning English. All rights reserved.
+		</footer>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

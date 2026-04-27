@@ -1,4 +1,5 @@
 ---
+import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 
 // 1. Astro에게 어떤 페이지들을 미리 만들지 알려줍니다.
@@ -15,21 +16,24 @@ const { post } = Astro.props;
 // 3. 마크다운 본문을 렌더링합니다.
 const { Content } = await render(post);
 ---
+<Layout title={post.data.title}>
+  <article class="prose prose-slate lg:prose-xl mx-auto py-12">
+    <header class="mb-8 border-b pb-8">
+      <h1 class="text-4xl font-bold mb-4">{post.data.title}</h1>
+      <div class="flex gap-4 text-slate-400 text-sm">
+        <time>Posted: {post.data.date.toLocaleDateString()}</time>
+        <span>•</span>
+        <span>Study Notes</span>
+      </div>
+    </header>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8" />
-    <title>{post.data.title}</title>
-</head>
-<body>
-    <nav><a href="/">← 목록으로 돌아가기</a></nav>
-    <hr />
-    <h1>{post.data.title}</h1>
-    <p>발행일: {post.data.date.toLocaleDateString()}</p>
+    {/* 마크다운 본문이 들어가는 자리 */}
+    <div class="content-body">
+      <Content />
+    </div>
     
-    <article>
-        <Content />
-    </article>
-</body>
-</html>
+    <footer class="mt-12 pt-8 border-t">
+      <a href="/" class="text-indigo-600 hover:underline">← Back to List</a>
+    </footer>
+  </article>
+</Layout>
