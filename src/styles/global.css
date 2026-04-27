@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+/* 다크 모드를 클래스 기반으로 작동하게 설정 */
+@variant dark (&:where(.dark, .dark *));
+
+/* Dark Mode */
+/* 1. 기본 테마 정의: 여기에는 '값'만 정의합니다. */
+@theme {
+  --color-bg-page: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-text-base: #0f172a;  /* slate-900 */
+  --color-text-muted: #64748b; /* slate-500 */
+  --color-border-base: #f1f5f9; /* slate-100 */
+  --color-bg-toggle: #f1f5f9; /* slate-100 */
+}
+
+/* 2. 다크 모드 덮어쓰기: @theme 블록 '밖'에서 정의합니다. */
+/* html 태그에 .dark 클래스가 붙었을 때 변수 값만 바꿉니다. */
+.dark {
+  --color-bg-page: #020617;   /* slate-950 */
+  --color-bg-card: #0f172a;   /* slate-900 */
+  --color-text-base: #e2e8f0; /* slate-200 */
+  --color-text-muted: #94a3b8; /* slate-400 */
+  --color-border-base: #1e293b; /* slate-800 */
+  --color-bg-toggle: #334155; /* slate-700 */
+}
+
+/* 전환 애니메이션 제거 (기존 동일) */
+*, *::before, *::after {
+  transition-property: none !important;
+  transition-duration: 0s !important;
+}
