@@ -3,37 +3,63 @@ import '../styles/global.css';
 // ThemeToggle 임포트 삭제
 const {title} = Astro.props;
 ---
+<!-- 아이콘(UI) -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width" initial-scale=1.0/>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
         <title>{title || 'Daily Learning English'}</title>
         </head>
     <body class="bg-white text-slate-900 min-h-screen">
-        <nav class="sticky top-0 z-50 p-6 bg-bg-nav/80 backdrop-blur-md border-b border-border-nav shadow-sm">
-            <div class="navbar max-w-7xl mx-auto flex justify-between items-center">
-                <a href="/" class="text-xl font-bold bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-                    Daily Learning English
-                </a>
-                <div class="flex items-center space-x-6 text-sm font-medium">
-                    <a href="/" class="hover:text-indigo-600 transition-colors">Home</a>
-                    <a href="/every-week-voca" class="hover:text-indigo-600 transition-colors">Every Week Voca</a>
-                    <a href="/my-english-journey" class="hover:text-indigo-600 transition-colors">My English Journey</a>
-                    <a href="/about" class="hover:text-indigo-600 transition-colors">About</a>
-                    <a href="/blog/first-post" class="hover:text-indigo-600 transition-colors">Contact</a>
-                    <a href="/contact" class="hover:text-indigo-600 transition-colors">Contact</a>
+        <div class="navbar bg-bg-nav shadow-sm">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl">Daily Learning English</a>
+            </div>
+
+            <!-- mobile Navbar -->
+            <div class="flex-none">
+                <div class="dropdown dropdown-end">
+                    <div class="lg:hidden md:hidden">
+                        <div tabindex="0" role="button" class="btn btn-ghost md:hidden">
+                            <ion-icon name="menu-outline"></ion-icon>
+                        </div>
+                        <ul tabindex="-1" class="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a href="/" class="hover:text-indigo-600 transition-colors">Home</a></li>
+                            <li><a href="/every-week-voca" class="hover:text-indigo-600 transition-colors">Every Week Voca</a></li>
+                            <li><a href="/my-english-journey" class="hover:text-indigo-600 transition-colors">My English Journey</a></li>
+                            <li><a href="/about" class="hover:text-indigo-600 transition-colors">About</a></li>
+                            <li><a href="/contact" class="hover:text-indigo-600 transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </nav>
-        
-        <main class="max-w-7xl mx-auto p-4">
+            
+
+            <!-- Desktop Navbar -->
+            <div class="hidden md:flex">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="/" class="hover:text-indigo-600 transition-colors">Home</a></li>
+                    <li><a href="/every-week-voca" class="hover:text-indigo-600 transition-colors">Every Week Voca</a></li>
+                    <li><a href="/my-english-journey" class="hover:text-indigo-600 transition-colors">My English Journey</a></li>
+                    <li><a href="/about" class="hover:text-indigo-600 transition-colors">About</a></li>
+                    <li><a href="/contact" class="hover:text-indigo-600 transition-colors">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- content -->
+        <main class="max-w-7xl mx-auto p-3">
             <slot />
         </main>
 
+        <!-- footer -->
         <footer class="text-center p-10 text-slate-400 text-sm">
             © 2026 Daily Learning English. All rights reserved.
         </footer>
